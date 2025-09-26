@@ -272,6 +272,7 @@
                             <optgroup label="💚 Verdes">
                                 <option value="skinny-green-480">💚 Skinny Green 480ml</option>
                                 <option value="skinny-green-350">💚 Skinny Green 350ml</option>
+                                <option value="skinny-green-1000">💚 Skinny Green 1000ml</option>
                                 <option value="greenergy-480">🌱 Greenergy 480ml</option>
                                 <option value="greenergy-350">🌱 Greenergy 350ml</option>
                             </optgroup>
@@ -289,6 +290,7 @@
                             </optgroup>
                             <optgroup label="💪 Shots y Concentrados">
                                 <option value="immune-boost-50">💪 Immune Boost 50ml</option>
+                                <option value="immune-boost-250">💪 Immune Boost 250ml</option>
                                 <option value="gingerlicious-50">🫚 Gingerlicious 50ml</option>
                                 <option value="gingerlicious-250">🫚 Gingerlicious 250ml</option>
                             </optgroup>
@@ -378,7 +380,6 @@
     </div>
 
     <script>
-        // Base de datos REAL de Reset Juice con datos extraídos del Excel
         const resetProducts = {
             'carrot-rush-480': {
                 name: 'Carrot Rush 480ml',
@@ -402,6 +403,17 @@
                 volatilityMultiplier: 1.1,
                 averageMonthly: 530
             },
+            'immune-boost-250': {
+                name: 'Immune Boost 250ml',
+                shelfLife: 120,
+                seasonalIndices: {
+                    'enero': 0.934, 'febrero': 1.267, 'marzo': 0.689, 'abril': 1.134,
+                    'mayo': 0.945, 'junio': 1.278, 'julio': 0.923, 'agosto': 0.889,
+                    'septiembre': 1.089, 'octubre': 0.834, 'noviembre': 1.134, 'diciembre': 0.378
+                },
+                volatilityMultiplier: 1.2,
+                averageMonthly: 234
+            },
             'skinny-green-480': {
                 name: 'Skinny Green 480ml',
                 shelfLife: 75,
@@ -423,6 +435,17 @@
                 },
                 volatilityMultiplier: 1.4,
                 averageMonthly: 83
+            },
+            'skinny-green-1000': {
+                name: 'Skinny Green 1000ml',
+                shelfLife: 120,
+                seasonalIndices: {
+                    'enero': 1.534, 'febrero': 1.189, 'marzo': 1.134, 'abril': 1.267,
+                    'mayo': 1.378, 'junio': 1.156, 'julio': 1.389, 'agosto': 1.089,
+                    'septiembre': 0.456, 'octubre': 0.334, 'noviembre': 0.289, 'diciembre': 0.156
+                },
+                volatilityMultiplier: 1.2,
+                averageMonthly: 156
             },
             'greenergy-480': {
                 name: 'Greenergy 480ml',
@@ -468,6 +491,28 @@
                 volatilityMultiplier: 1.4,
                 averageMonthly: 42
             },
+            'c-master-480': {
+                name: 'C-Master 480ml',
+                shelfLife: 70,
+                seasonalIndices: {
+                    'enero': 1.834, 'febrero': 1.427, 'marzo': 1.240, 'abril': 1.150,
+                    'mayo': 1.611, 'junio': 1.233, 'julio': 1.419, 'agosto': 1.028,
+                    'septiembre': 0.598, 'octubre': 0.275, 'noviembre': 0.145, 'diciembre': 0.040
+                },
+                volatilityMultiplier: 1.4,
+                averageMonthly: 186
+            },
+            'c-master-350': {
+                name: 'C-Master 350ml',
+                shelfLife: 70,
+                seasonalIndices: {
+                    'enero': 1.645, 'febrero': 1.298, 'marzo': 1.156, 'abril': 1.089,
+                    'mayo': 1.423, 'junio': 1.167, 'julio': 1.298, 'agosto': 0.978,
+                    'septiembre': 0.534, 'octubre': 0.267, 'noviembre': 0.134, 'diciembre': 0.045
+                },
+                volatilityMultiplier: 1.4,
+                averageMonthly: 89
+            },
             'pinebliss-480': {
                 name: 'Pinebliss 480ml',
                 shelfLife: 120,
@@ -489,6 +534,50 @@
                 },
                 volatilityMultiplier: 1.7,
                 averageMonthly: 45
+            },
+            'spicy-limonata-480': {
+                name: 'Spicy Limonata 480ml',
+                shelfLife: 120,
+                seasonalIndices: {
+                    'enero': 1.329, 'febrero': 1.231, 'marzo': 1.173, 'abril': 1.281,
+                    'mayo': 1.589, 'junio': 1.074, 'julio': 1.358, 'agosto': 1.101,
+                    'septiembre': 0.744, 'octubre': 0.387, 'noviembre': 0.394, 'diciembre': 0.340
+                },
+                volatilityMultiplier: 1.1,
+                averageMonthly: 138
+            },
+            'spicy-limonata-350': {
+                name: 'Spicy Limonata 350ml',
+                shelfLife: 120,
+                seasonalIndices: {
+                    'enero': 1.234, 'febrero': 1.156, 'marzo': 1.089, 'abril': 1.203,
+                    'mayo': 1.456, 'junio': 1.034, 'julio': 1.267, 'agosto': 1.067,
+                    'septiembre': 0.723, 'octubre': 0.398, 'noviembre': 0.367, 'diciembre': 0.306
+                },
+                volatilityMultiplier: 1.1,
+                averageMonthly: 67
+            },
+            'black-magic-480': {
+                name: 'Black Magic 480ml',
+                shelfLife: 135,
+                seasonalIndices: {
+                    'enero': 1.111, 'febrero': 1.285, 'marzo': 1.074, 'abril': 1.561,
+                    'mayo': 1.243, 'junio': 1.185, 'julio': 1.375, 'agosto': 1.412,
+                    'septiembre': 0.611, 'octubre': 0.603, 'noviembre': 0.460, 'diciembre': 0.079
+                },
+                volatilityMultiplier: 1.1,
+                averageMonthly: 63
+            },
+            'tropik-glow-480': {
+                name: 'Tropik Glow 480ml',
+                shelfLife: 70,
+                seasonalIndices: {
+                    'enero': 1.729, 'febrero': 1.210, 'marzo': 1.253, 'abril': 1.367,
+                    'mayo': 1.529, 'junio': 1.263, 'julio': 1.587, 'agosto': 1.340,
+                    'septiembre': 0.217, 'octubre': 0.196, 'noviembre': 0.170, 'diciembre': 0.138
+                },
+                volatilityMultiplier: 1.4,
+                averageMonthly: 138
             },
             'vitality-mylk-480': {
                 name: 'Vitality Mylk 480ml',
@@ -534,83 +623,6 @@
                 volatilityMultiplier: 1.4,
                 averageMonthly: 19
             },
-            'spicy-limonata-480': {
-                name: 'Spicy Limonata 480ml',
-                shelfLife: 120,
-                seasonalIndices: {
-                    'enero': 1.329, 'febrero': 1.231, 'marzo': 1.173, 'abril': 1.281,
-                    'mayo': 1.589, 'junio': 1.074, 'julio': 1.358, 'agosto': 1.101,
-                    'septiembre': 0.744, 'octubre': 0.387, 'noviembre': 0.394, 'diciembre': 0.340
-                },
-                volatilityMultiplier: 1.1,
-                averageMonthly: 138
-            },
-            'c-master-350': {
-                name: 'C-Master 350ml',
-                shelfLife: 70,
-                seasonalIndices: {
-                    'enero': 1.645, 'febrero': 1.298, 'marzo': 1.156, 'abril': 1.089,
-                    'mayo': 1.423, 'junio': 1.167, 'julio': 1.298, 'agosto': 0.978,
-                    'septiembre': 0.534, 'octubre': 0.267, 'noviembre': 0.134, 'diciembre': 0.045
-                },
-                volatilityMultiplier: 1.4,
-                averageMonthly: 89
-            },
-            'spicy-limonata-350': {
-                name: 'Spicy Limonata 350ml',
-                shelfLife: 120,
-                seasonalIndices: {
-                    'enero': 1.234, 'febrero': 1.156, 'marzo': 1.089, 'abril': 1.203,
-                    'mayo': 1.456, 'junio': 1.034, 'julio': 1.267, 'agosto': 1.067,
-                    'septiembre': 0.723, 'octubre': 0.398, 'noviembre': 0.367, 'diciembre': 0.306
-                },
-                volatilityMultiplier: 1.1,
-                averageMonthly: 67
-            },
-            'skinny-green-1000': {
-                name: 'Skinny Green 1000ml',
-                shelfLife: 120,
-                seasonalIndices: {
-                    'enero': 1.534, 'febrero': 1.189, 'marzo': 1.134, 'abril': 1.267,
-                    'mayo': 1.378, 'junio': 1.156, 'julio': 1.389, 'agosto': 1.089,
-                    'septiembre': 0.456, 'octubre': 0.334, 'noviembre': 0.289, 'diciembre': 0.156
-                },
-                volatilityMultiplier: 1.2,
-                averageMonthly: 156
-            },
-            'c-master-480': {
-                name: 'C-Master 480ml',
-                shelfLife: 70,
-                seasonalIndices: {
-                    'enero': 1.834, 'febrero': 1.427, 'marzo': 1.240, 'abril': 1.150,
-                    'mayo': 1.611, 'junio': 1.233, 'julio': 1.419, 'agosto': 1.028,
-                    'septiembre': 0.598, 'octubre': 0.275, 'noviembre': 0.145, 'diciembre': 0.040
-                },
-                volatilityMultiplier: 1.4,
-                averageMonthly: 186
-            },
-            'black-magic-480': {
-                name: 'Black Magic 480ml',
-                shelfLife: 135,
-                seasonalIndices: {
-                    'enero': 1.111, 'febrero': 1.285, 'marzo': 1.074, 'abril': 1.561,
-                    'mayo': 1.243, 'junio': 1.185, 'julio': 1.375, 'agosto': 1.412,
-                    'septiembre': 0.611, 'octubre': 0.603, 'noviembre': 0.460, 'diciembre': 0.079
-                },
-                volatilityMultiplier: 1.1,
-                averageMonthly: 63
-            },
-            'tropik-glow-480': {
-                name: 'Tropik Glow 480ml',
-                shelfLife: 70,
-                seasonalIndices: {
-                    'enero': 1.729, 'febrero': 1.210, 'marzo': 1.253, 'abril': 1.367,
-                    'mayo': 1.529, 'junio': 1.263, 'julio': 1.587, 'agosto': 1.340,
-                    'septiembre': 0.217, 'octubre': 0.196, 'noviembre': 0.170, 'diciembre': 0.138
-                },
-                volatilityMultiplier: 1.4,
-                averageMonthly: 138
-            },
             'gingerlicious-50': {
                 name: 'Gingerlicious 50ml',
                 shelfLife: 150,
@@ -646,30 +658,27 @@
             
             const product = resetProducts[productId];
             
-            let infoClass = 'product-info';
             let infoText = `📊 <strong>${product.name}</strong><br>
                            ⏱️ Vida útil: ${product.shelfLife} días<br>
                            📈 Promedio mensual real: ${product.averageMonthly} unidades<br>
                            🎯 Volatilidad: ${product.volatilityMultiplier}x`;
             
             if (product.shelfLife <= 25) {
-                infoText += '<br>⚠️ <strong>VIDA ÚTIL CRÍTICA</strong> - Se aplicarán límites estrictos';
+                infoText += '<br>⚠️ <strong>VIDA ÚTIL CRÍTICA</strong>';
             } else if (product.shelfLife <= 70) {
-                infoText += '<br>⚠️ <strong>VIDA ÚTIL CORTA</strong> - Se limitará por caducidad';
+                infoText += '<br>⚠️ <strong>VIDA ÚTIL CORTA</strong>';
             }
             
-            infoDiv.innerHTML = `<div class="${infoClass}">${infoText}</div>`;
+            infoDiv.innerHTML = `<div class="product-info">${infoText}</div>`;
         }
 
         function calculate() {
-            // Obtener valores
             const productId = document.getElementById('productSelect').value;
             const month1 = parseFloat(document.getElementById('month1').value);
             const month2 = parseFloat(document.getElementById('month2').value);
             const month3 = parseFloat(document.getElementById('month3').value);
             const targetMonth = document.getElementById('targetMonth').value;
             
-            // Validaciones
             if (!productId) {
                 alert('Por favor selecciona un producto');
                 return;
@@ -687,15 +696,11 @@
             
             const product = resetProducts[productId];
             
-            // CÁLCULOS
-            // 1. Promedio ponderado (más peso al mes reciente)
+            // Cálculos
             const baseDemand = (month1 * 0.2) + (month2 * 0.3) + (month3 * 0.5);
-            
-            // 2. Factor estacional real
             const seasonalFactor = product.seasonalIndices[targetMonth];
             const seasonalDemand = baseDemand * seasonalFactor;
             
-            // 3. Stock de seguridad
             const variance = Math.sqrt(
                 (Math.pow(month1 - baseDemand, 2) + 
                  Math.pow(month2 - baseDemand, 2) + 
@@ -703,25 +708,22 @@
             );
             const safetyStock = variance * product.volatilityMultiplier;
             
-            // 4. Control de vida útil
             const dailyDemand = seasonalDemand / 30;
             const maxSellable = dailyDemand * product.shelfLife;
             
-            // 5. Recomendación final
             const baseRecommendation = seasonalDemand + safetyStock;
             const finalRecommendation = baseRecommendation > maxSellable ? 
                 Math.round(maxSellable) : Math.round(baseRecommendation);
             
-            // 6. Días de cobertura
             const coverage = Math.round(finalRecommendation / dailyDemand);
             
-            // MOSTRAR RESULTADOS
+            // Mostrar resultados
             document.getElementById('recommendation').textContent = finalRecommendation + ' unidades';
             document.getElementById('baseDemand').textContent = Math.round(baseDemand);
             document.getElementById('seasonalFactor').textContent = seasonalFactor.toFixed(3);
             document.getElementById('coverage').textContent = coverage + ' días';
             
-            // EXPLICACIÓN SIMPLE
+            // Explicación
             let temporada = '';
             if (seasonalFactor > 1.3) {
                 temporada = 'temporada alta';
@@ -761,7 +763,6 @@
             
             document.getElementById('explanation').innerHTML = explanationText;
             
-            // Mostrar resultados
             document.getElementById('results').style.display = 'block';
             document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
         }
