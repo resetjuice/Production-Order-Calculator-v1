@@ -275,11 +275,15 @@
                                 <option value="greenergy-480">🌱 Greenergy 480ml</option>
                                 <option value="greenergy-350">🌱 Greenergy 350ml</option>
                             </optgroup>
+                            <optgroup label="🧡 C-Master">
+                                <option value="c-master-480">🧡 C-Master 480ml</option>
+                                <option value="c-master-350">🧡 C-Master 350ml</option>
+                            </optgroup>
                             <optgroup label="🍍 Cítricos y Frutas">
                                 <option value="pinebliss-480">🍍 Pinebliss 480ml</option>
                                 <option value="pinebliss-350">🍍 Pinebliss 350ml</option>
                                 <option value="spicy-limonata-480">🌶️ Spicy Limonata 480ml</option>
-                                <option value="c-master-480">🧡 C-Master 480ml</option>
+                                <option value="spicy-limonata-350">🌶️ Spicy Limonata 350ml</option>
                                 <option value="black-magic-480">⚫ Black Magic 480ml</option>
                                 <option value="tropik-glow-480">🌴 Tropik Glow 480ml</option>
                             </optgroup>
@@ -540,6 +544,39 @@
                 },
                 volatilityMultiplier: 1.1,
                 averageMonthly: 138
+            },
+            'c-master-350': {
+                name: 'C-Master 350ml',
+                shelfLife: 70,
+                seasonalIndices: {
+                    'enero': 1.645, 'febrero': 1.298, 'marzo': 1.156, 'abril': 1.089,
+                    'mayo': 1.423, 'junio': 1.167, 'julio': 1.298, 'agosto': 0.978,
+                    'septiembre': 0.534, 'octubre': 0.267, 'noviembre': 0.134, 'diciembre': 0.045
+                },
+                volatilityMultiplier: 1.4,
+                averageMonthly: 89
+            },
+            'spicy-limonata-350': {
+                name: 'Spicy Limonata 350ml',
+                shelfLife: 120,
+                seasonalIndices: {
+                    'enero': 1.234, 'febrero': 1.156, 'marzo': 1.089, 'abril': 1.203,
+                    'mayo': 1.456, 'junio': 1.034, 'julio': 1.267, 'agosto': 1.067,
+                    'septiembre': 0.723, 'octubre': 0.398, 'noviembre': 0.367, 'diciembre': 0.306
+                },
+                volatilityMultiplier: 1.1,
+                averageMonthly: 67
+            },
+            'skinny-green-1000': {
+                name: 'Skinny Green 1000ml',
+                shelfLife: 120,
+                seasonalIndices: {
+                    'enero': 1.534, 'febrero': 1.189, 'marzo': 1.134, 'abril': 1.267,
+                    'mayo': 1.378, 'junio': 1.156, 'julio': 1.389, 'agosto': 1.089,
+                    'septiembre': 0.456, 'octubre': 0.334, 'noviembre': 0.289, 'diciembre': 0.156
+                },
+                volatilityMultiplier: 1.2,
+                averageMonthly: 156
             },
             'c-master-480': {
                 name: 'C-Master 480ml',
