@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Juice | Calculadora v7.0</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #81C784 0%, #4CAF50 50%, #388E3C 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(56, 142, 60, 0.15);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4CAF50, #66BB6A);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+        
+        .version-badge {
+            background: rgba(255,255,255,0.25);
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.9em;
+            margin-top: 15px;
+            display: inline-block;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        .reset-badge {
+            background: #2E7D32;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .product-insight {
+            background: linear-gradient(135deg, #C8E6C9, #A5D6A7);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border-left: 5px solid #4CAF50;
+        }
+        
+        .product-insight h3 {
+            color: #2E7D32;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+        
+        .product-insight p {
+            color: #1B5E20;
+            line-height: 1.6;
+        }
+        
+        .form-section {
+            background: #F1F8E9;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 2px solid #C8E6C9;
+        }
+        
+        .form-section h3 {
+            color: #2E7D32;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            border-bottom: 3px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+        
+        .input-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .input-field {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .input-field label {
+            font-weight: 600;
+            color: #2E7D32;
+            margin-bottom: 8px;
+            font-size: 1em;
+        }
+        
+        .input-field input, .input-field select {
+            padding: 15px;
+            border: 2px solid #C8E6C9;
+            border-radius: 10px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .input-field input:focus, .input-field select:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.1);
+        }
+        
+        .product-info {
+            background: #E8F5E8;
+            border: 2px solid #A5D6A7;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+            color: #1B5E20;
+        }
+        
+        .calculate-btn {
+            background: linear-gradient(135deg, #4CAF50, #66BB6A);
+            color: white;
+            border: none;
+            padding: 18px 45px;
+            font-size: 1.2em;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 25px auto;
+            display: block;
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+        }
+        
+        .calculate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(76, 175, 80, 0.4);
+        }
+        
+        .results {
+            display: none;
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            margin-top: 30px;
+            border: 3px solid #4CAF50;
+            box-shadow: 0 15px 40px rgba(76, 175, 80, 0.15);
+        }
+        
+        .results h3 {
+            color: #2E7D32;
+            margin-bottom: 30px;
+            font-size: 1.8em;
+            text-align: center;
+        }
+        
+        .result-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.1);
+            border-left: 5px solid #81C784;
+            border: 1px solid #E8F5E8;
+        }
+        
+        .result-main {
+            border-left-color: #4CAF50;
+            background: linear-gradient(135deg, #F1F8E9, #E8F5E8);
+            border: 2px solid #4CAF50;
+        }
+        
+        .result-card h4 {
+            color: #2E7D32;
+            margin-bottom: 12px;
+            font-size: 1.2em;
+        }
+        
+        .result-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #2E7D32;
+        }
+        
+        .explanation {
+            background: #F1F8E9;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #4CAF50;
+            margin-top: 20px;
+        }
+        
+        .explanation p {
+            font-size: 1.1em;
+            color: #2E7D32;
+            line-height: 1.6;
+            margin: 0;
+        }
+        
+        .data-badge {
+            background: #2E7D32;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            margin: 10px 0;
+            display: inline-block;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧃 Reset Juice | Calculadora Inteligente</h1>
+            <p>Predicción de demanda con datos históricos reales</p>
+            <div class="version-badge">
+                ✨ Versión 7.0 - Recomendación Específica
+                <span class="reset-badge">RESET JUICE</span>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="product-insight">
+                <h3>📊 Alimentado por Datos Reales de Reset Juice</h3>
+                <p><strong>Precisión científica:</strong> Esta calculadora utiliza tus datos históricos reales de ventas 2023-2025, con índices estacionales calculados específicamente para cada producto Reset Juice.</p>
+                <div class="data-badge">📈 Basado en 1,908 registros reales</div>
+            </div>
+            
+            <div class="form-section">
+                <h3>🧃 Selección de Producto</h3>
+                <div class="input-group">
+                    <div class="input-field">
+                        <label for="productSelect">Producto Reset Juice</label>
+                        <select id="productSelect" onchange="showProductInfo()">
+                            <option value="">-- Selecciona un producto --</option>
+                            <optgroup label="🥕 Raíces y Vegetales">
+                                <option value="carrot-rush-480">🥕 Carrot Rush 480ml</option>
+                                <option value="unbeetable-480">🔥 Unbeetable 480ml</option>
+                                <option value="unbeetable-350">🔥 Unbeetable 350ml</option>
+                            </optgroup>
+                            <optgroup label="💚 Verdes">
+                                <option value="skinny-green-480">💚 Skinny Green 480ml</option>
+                                <option value="skinny-green-350">💚 Skinny Green 350ml</option>
+                                <option value="greenergy-480">🌱 Greenergy 480ml</option>
+                                <option value="greenergy-350">🌱 Greenergy 350ml</option>
+                            </optgroup>
+                            <optgroup label="🍍 Cítricos y Frutas">
+                                <option value="pinebliss-480">🍍 Pinebliss 480ml</option>
+                                <option value="pinebliss-350">🍍 Pinebliss 350ml</option>
+                                <option value="spicy-limonata-480">🌶️ Spicy Limonata 480ml</option>
+                                <option value="c-master-480">🧡 C-Master 480ml</option>
+                                <option value="black-magic-480">⚫ Black Magic 480ml</option>
+                                <option value="tropik-glow-480">🌴 Tropik Glow 480ml</option>
+                            </optgroup>
+                            <optgroup label="💪 Shots y Concentrados">
+                                <option value="immune-boost-50">💪 Immune Boost 50ml</option>
+                                <option value="gingerlicious-50">🫚 Gingerlicious 50ml</option>
+                                <option value="gingerlicious-250">🫚 Gingerlicious 250ml</option>
+                            </optgroup>
+                            <optgroup label="🥛 Leches Vegetales">
+                                <option value="vitality-mylk-480">🥛 Vitality Mylk 480ml</option>
+                                <option value="coco-dream-480">🤍 Coco Dream 480ml</option>
+                                <option value="chokonut-480">🍫 Chokonut 480ml</option>
+                                <option value="coco-blast-480">🥥 Coco Blast 480ml</option>
+                            </optgroup>
+                        </select>
+                        <div id="productInfo"></div>
+                    </div>
+                    <div class="input-field">
+                        <label for="targetMonth">Mes Objetivo</label>
+                        <select id="targetMonth">
+                            <option value="">Selecciona el mes</option>
+                            <option value="enero">Enero</option>
+                            <option value="febrero">Febrero</option>
+                            <option value="marzo">Marzo</option>
+                            <option value="abril">Abril</option>
+                            <option value="mayo">Mayo</option>
+                            <option value="junio">Junio</option>
+                            <option value="julio">Julio</option>
+                            <option value="agosto">Agosto</option>
+                            <option value="septiembre">Septiembre</option>
+                            <option value="octubre">Octubre</option>
+                            <option value="noviembre">Noviembre</option>
+                            <option value="diciembre">Diciembre</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <h3>📈 Ventas de los Últimos 3 Meses</h3>
+                <div class="input-group">
+                    <div class="input-field">
+                        <label for="month1">Mes 1 (más antiguo)</label>
+                        <input type="number" id="month1" placeholder="Ej: 126" min="0">
+                    </div>
+                    <div class="input-field">
+                        <label for="month2">Mes 2</label>
+                        <input type="number" id="month2" placeholder="Ej: 80" min="0">
+                    </div>
+                    <div class="input-field">
+                        <label for="month3">Mes 3 (más reciente)</label>
+                        <input type="number" id="month3" placeholder="Ej: 132" min="0">
+                    </div>
+                </div>
+            </div>
+            
+            <button class="calculate-btn" onclick="calculate()">🧃 Calcular Orden Reset</button>
+            
+            <div id="results" class="results">
+                <h3>📋 Recomendación Reset Juice</h3>
+                
+                <div class="result-card result-main">
+                    <h4>🎯 CANTIDAD RECOMENDADA</h4>
+                    <div class="result-value" id="recommendation">--</div>
+                    <p>Cantidad óptima calculada con datos reales</p>
+                </div>
+                
+                <div class="result-card">
+                    <h4>📊 Demanda Base</h4>
+                    <div class="result-value" id="baseDemand">--</div>
+                    <p>Promedio ponderado de últimos 3 meses</p>
+                </div>
+                
+                <div class="result-card">
+                    <h4>🌟 Factor Estacional</h4>
+                    <div class="result-value" id="seasonalFactor">--</div>
+                    <p>Basado en datos históricos reales</p>
+                </div>
+                
+                <div class="result-card">
+                    <h4>📅 Días de Cobertura</h4>
+                    <div class="result-value" id="coverage">--</div>
+                    <p>Duración estimada del inventario</p>
+                </div>
+                
+                <div class="explanation">
+                    <h4>💡 ¿Por qué esta cantidad?</h4>
+                    <div id="explanation">--</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Base de datos REAL de Reset Juice con datos extraídos del Excel
+        const resetProducts = {
+            'carrot-rush-480': {
+                name: 'Carrot Rush 480ml',
+                shelfLife: 75,
+                seasonalIndices: {
+                    'enero': 1.912, 'febrero': 1.471, 'marzo': 1.201, 'abril': 1.268,
+                    'mayo': 1.294, 'junio': 1.262, 'julio': 1.220, 'agosto': 1.310,
+                    'septiembre': 0.439, 'octubre': 0.372, 'noviembre': 0.222, 'diciembre': 0.029
+                },
+                volatilityMultiplier: 1.1,
+                averageMonthly: 104
+            },
+            'immune-boost-50': {
+                name: 'Immune Boost 50ml',
+                shelfLife: 150,
+                seasonalIndices: {
+                    'enero': 0.983, 'febrero': 1.346, 'marzo': 0.722, 'abril': 1.181,
+                    'mayo': 0.988, 'junio': 1.334, 'julio': 0.952, 'agosto': 0.919,
+                    'septiembre': 1.131, 'octubre': 0.884, 'noviembre': 1.169, 'diciembre': 0.390
+                },
+                volatilityMultiplier: 1.1,
+                averageMonthly: 530
+            },
+            'skinny-green-480': {
+                name: 'Skinny Green 480ml',
+                shelfLife: 75,
+                seasonalIndices: {
+                    'enero': 1.625, 'febrero': 1.243, 'marzo': 1.214, 'abril': 1.348,
+                    'mayo': 1.461, 'junio': 1.186, 'julio': 1.472, 'agosto': 1.120,
+                    'septiembre': 0.494, 'octubre': 0.350, 'noviembre': 0.314, 'diciembre': 0.173
+                },
+                volatilityMultiplier: 1.1,
+                averageMonthly: 429
+            },
+            'skinny-green-350': {
+                name: 'Skinny Green 350ml',
+                shelfLife: 100,
+                seasonalIndices: {
+                    'enero': 1.384, 'febrero': 1.146, 'marzo': 1.222, 'abril': 1.012,
+                    'mayo': 0.734, 'junio': 0.920, 'julio': 1.053, 'agosto': 1.021,
+                    'septiembre': 1.301, 'octubre': 1.271, 'noviembre': 0.623, 'diciembre': 0.315
+                },
+                volatilityMultiplier: 1.4,
+                averageMonthly: 83
+            },
+            'greenergy-480': {
+                name: 'Greenergy 480ml',
+                shelfLife: 80,
+                seasonalIndices: {
+                    'enero': 1.758, 'febrero': 1.293, 'marzo': 1.264, 'abril': 1.422,
+                    'mayo': 1.548, 'junio': 1.269, 'julio': 1.410, 'agosto': 1.176,
+                    'septiembre': 0.200, 'octubre': 0.305, 'noviembre': 0.237, 'diciembre': 0.117
+                },
+                volatilityMultiplier: 1.4,
+                averageMonthly: 359
+            },
+            'greenergy-350': {
+                name: 'Greenergy 350ml',
+                shelfLife: 100,
+                seasonalIndices: {
+                    'enero': 1.391, 'febrero': 1.018, 'marzo': 1.103, 'abril': 0.968,
+                    'mayo': 0.926, 'junio': 0.565, 'julio': 1.311, 'agosto': 0.934,
+                    'septiembre': 1.155, 'octubre': 1.064, 'noviembre': 0.962, 'diciembre': 0.601
+                },
+                volatilityMultiplier: 1.4,
+                averageMonthly: 83
+            },
+            'unbeetable-480': {
+                name: 'Unbeetable 480ml',
+                shelfLife: 80,
+                seasonalIndices: {
+                    'enero': 1.662, 'febrero': 1.269, 'marzo': 1.153, 'abril': 1.232,
+                    'mayo': 1.438, 'junio': 1.294, 'julio': 1.452, 'agosto': 1.164,
+                    'septiembre': 0.463, 'octubre': 0.347, 'noviembre': 0.314, 'diciembre': 0.211
+                },
+                volatilityMultiplier: 1.1,
+                averageMonthly: 331
+            },
+            'unbeetable-350': {
+                name: 'Unbeetable 350ml',
+                shelfLife: 100,
+                seasonalIndices: {
+                    'enero': 1.227, 'febrero': 0.738, 'marzo': 1.484, 'abril': 0.746,
+                    'mayo': 0.834, 'junio': 1.171, 'julio': 1.131, 'agosto': 1.372,
+                    'septiembre': 1.324, 'octubre': 1.215, 'noviembre': 0.590, 'diciembre': 0.168
+                },
+                volatilityMultiplier: 1.4,
+                averageMonthly: 42
+            },
+            'pinebliss-480': {
+                name: 'Pinebliss 480ml',
+                shelfLife: 120,
+                seasonalIndices: {
+                    'enero': 1.753, 'febrero': 1.414, 'marzo': 1.190, 'abril': 1.262,
+                    'mayo': 1.443, 'junio': 1.410, 'julio': 1.321, 'agosto': 1.053,
+                    'septiembre': 0.355, 'octubre': 0.307, 'noviembre': 0.257, 'diciembre': 0.234
+                },
+                volatilityMultiplier: 1.1,
+                averageMonthly: 269
+            },
+            'pinebliss-350': {
+                name: 'Pinebliss 350ml',
+                shelfLife: 120,
+                seasonalIndices: {
+                    'enero': 1.303, 'febrero': 1.016, 'marzo': 1.149, 'abril': 1.381,
+                    'mayo': 0.788, 'junio': 1.097, 'julio': 1.186, 'agosto': 0.854,
+                    'septiembre': 0.972, 'octubre': 1.657, 'noviembre': 0.464, 'diciembre': 0.133
+                },
+                volatilityMultiplier: 1.7,
+                averageMonthly: 45
+            },
+            'vitality-mylk-480': {
+                name: 'Vitality Mylk 480ml',
+                shelfLife: 20,
+                seasonalIndices: {
+                    'enero': 1.981, 'febrero': 1.232, 'marzo': 1.370, 'abril': 1.497,
+                    'mayo': 1.609, 'junio': 1.166, 'julio': 1.571, 'agosto': 1.138,
+                    'septiembre': 0.192, 'octubre': 0.091, 'noviembre': 0.127, 'diciembre': 0.026
+                },
+                volatilityMultiplier: 1.4,
+                averageMonthly: 193
+            },
+            'coco-dream-480': {
+                name: 'Coco Dream 480ml',
+                shelfLife: 20,
+                seasonalIndices: {
+                    'enero': 1.820, 'febrero': 1.653, 'marzo': 1.228, 'abril': 1.263,
+                    'mayo': 1.659, 'junio': 0.964, 'julio': 0.964, 'agosto': 1.066,
+                    'septiembre': 0.458, 'octubre': 0.512, 'noviembre': 0.359, 'diciembre': 0.054
+                },
+                volatilityMultiplier: 1.4,
+                averageMonthly: 56
+            },
+            'chokonut-480': {
+                name: 'Chokonut 480ml',
+                shelfLife: 25,
+                seasonalIndices: {
+                    'enero': 0.792, 'febrero': 1.271, 'marzo': 1.053, 'abril': 0.834,
+                    'mayo': 1.251, 'junio': 1.115, 'julio': 1.251, 'agosto': 1.542,
+                    'septiembre': 1.032, 'octubre': 0.907, 'noviembre': 0.860, 'diciembre': 0.094
+                },
+                volatilityMultiplier: 1.4,
+                averageMonthly: 32
+            },
+            'coco-blast-480': {
+                name: 'Coco Blast 480ml',
+                shelfLife: 65,
+                seasonalIndices: {
+                    'enero': 0.700, 'febrero': 0.789, 'marzo': 1.291, 'abril': 1.076,
+                    'mayo': 1.184, 'junio': 2.099, 'julio': 0.700, 'agosto': 1.686,
+                    'septiembre': 0.592, 'octubre': 1.049, 'noviembre': 0.565, 'diciembre': 0.269
+                },
+                volatilityMultiplier: 1.4,
+                averageMonthly: 19
+            },
+            'spicy-limonata-480': {
+                name: 'Spicy Limonata 480ml',
+                shelfLife: 120,
+                seasonalIndices: {
+                    'enero': 1.329, 'febrero': 1.231, 'marzo': 1.173, 'abril': 1.281,
+                    'mayo': 1.589, 'junio': 1.074, 'julio': 1.358, 'agosto': 1.101,
+                    'septiembre': 0.744, 'octubre': 0.387, 'noviembre': 0.394, 'diciembre': 0.340
+                },
+                volatilityMultiplier: 1.1,
+                averageMonthly: 138
+            },
+            'c-master-480': {
+                name: 'C-Master 480ml',
+                shelfLife: 70,
+                seasonalIndices: {
+                    'enero': 1.834, 'febrero': 1.427, 'marzo': 1.240, 'abril': 1.150,
+                    'mayo': 1.611, 'junio': 1.233, 'julio': 1.419, 'agosto': 1.028,
+                    'septiembre': 0.598, 'octubre': 0.275, 'noviembre': 0.145, 'diciembre': 0.040
+                },
+                volatilityMultiplier: 1.4,
+                averageMonthly: 186
+            },
+            'black-magic-480': {
+                name: 'Black Magic 480ml',
+                shelfLife: 135,
+                seasonalIndices: {
+                    'enero': 1.111, 'febrero': 1.285, 'marzo': 1.074, 'abril': 1.561,
+                    'mayo': 1.243, 'junio': 1.185, 'julio': 1.375, 'agosto': 1.412,
+                    'septiembre': 0.611, 'octubre': 0.603, 'noviembre': 0.460, 'diciembre': 0.079
+                },
+                volatilityMultiplier: 1.1,
+                averageMonthly: 63
+            },
+            'tropik-glow-480': {
+                name: 'Tropik Glow 480ml',
+                shelfLife: 70,
+                seasonalIndices: {
+                    'enero': 1.729, 'febrero': 1.210, 'marzo': 1.253, 'abril': 1.367,
+                    'mayo': 1.529, 'junio': 1.263, 'julio': 1.587, 'agosto': 1.340,
+                    'septiembre': 0.217, 'octubre': 0.196, 'noviembre': 0.170, 'diciembre': 0.138
+                },
+                volatilityMultiplier: 1.4,
+                averageMonthly: 138
+            },
+            'gingerlicious-50': {
+                name: 'Gingerlicious 50ml',
+                shelfLife: 150,
+                seasonalIndices: {
+                    'enero': 0.926, 'febrero': 3.046, 'marzo': 0.435, 'abril': 0.553,
+                    'mayo': 1.107, 'junio': 1.608, 'julio': 0.787, 'agosto': 1.455,
+                    'septiembre': 0.496, 'octubre': 0.397, 'noviembre': 0.856, 'diciembre': 0.334
+                },
+                volatilityMultiplier: 2.0,
+                averageMonthly: 96
+            },
+            'gingerlicious-250': {
+                name: 'Gingerlicious 250ml',
+                shelfLife: 120,
+                seasonalIndices: {
+                    'enero': 0.108, 'febrero': 1.713, 'marzo': 1.856, 'abril': 1.804,
+                    'mayo': 1.748, 'junio': 1.852, 'julio': 2.095, 'agosto': 0.204,
+                    'septiembre': 0.137, 'octubre': 0.169, 'noviembre': 0.234, 'diciembre': 0.078
+                },
+                volatilityMultiplier: 2.0,
+                averageMonthly: 77
+            }
+        };
+
+        function showProductInfo() {
+            const productId = document.getElementById('productSelect').value;
+            const infoDiv = document.getElementById('productInfo');
+            
+            if (!productId) {
+                infoDiv.innerHTML = '';
+                return;
+            }
+            
+            const product = resetProducts[productId];
+            
+            let infoClass = 'product-info';
+            let infoText = `📊 <strong>${product.name}</strong><br>
+                           ⏱️ Vida útil: ${product.shelfLife} días<br>
+                           📈 Promedio mensual real: ${product.averageMonthly} unidades<br>
+                           🎯 Volatilidad: ${product.volatilityMultiplier}x`;
+            
+            if (product.shelfLife <= 25) {
+                infoText += '<br>⚠️ <strong>VIDA ÚTIL CRÍTICA</strong> - Se aplicarán límites estrictos';
+            } else if (product.shelfLife <= 70) {
+                infoText += '<br>⚠️ <strong>VIDA ÚTIL CORTA</strong> - Se limitará por caducidad';
+            }
+            
+            infoDiv.innerHTML = `<div class="${infoClass}">${infoText}</div>`;
+        }
+
+        function calculate() {
+            // Obtener valores
+            const productId = document.getElementById('productSelect').value;
+            const month1 = parseFloat(document.getElementById('month1').value);
+            const month2 = parseFloat(document.getElementById('month2').value);
+            const month3 = parseFloat(document.getElementById('month3').value);
+            const targetMonth = document.getElementById('targetMonth').value;
+            
+            // Validaciones
+            if (!productId) {
+                alert('Por favor selecciona un producto');
+                return;
+            }
+            
+            if (!targetMonth) {
+                alert('Por favor selecciona el mes objetivo');
+                return;
+            }
+            
+            if (isNaN(month1) || isNaN(month2) || isNaN(month3)) {
+                alert('Por favor ingresa las ventas de los 3 meses');
+                return;
+            }
+            
+            const product = resetProducts[productId];
+            
+            // CÁLCULOS
+            // 1. Promedio ponderado (más peso al mes reciente)
+            const baseDemand = (month1 * 0.2) + (month2 * 0.3) + (month3 * 0.5);
+            
+            // 2. Factor estacional real
+            const seasonalFactor = product.seasonalIndices[targetMonth];
+            const seasonalDemand = baseDemand * seasonalFactor;
+            
+            // 3. Stock de seguridad
+            const variance = Math.sqrt(
+                (Math.pow(month1 - baseDemand, 2) + 
+                 Math.pow(month2 - baseDemand, 2) + 
+                 Math.pow(month3 - baseDemand, 2)) / 3
+            );
+            const safetyStock = variance * product.volatilityMultiplier;
+            
+            // 4. Control de vida útil
+            const dailyDemand = seasonalDemand / 30;
+            const maxSellable = dailyDemand * product.shelfLife;
+            
+            // 5. Recomendación final
+            const baseRecommendation = seasonalDemand + safetyStock;
+            const finalRecommendation = baseRecommendation > maxSellable ? 
+                Math.round(maxSellable) : Math.round(baseRecommendation);
+            
+            // 6. Días de cobertura
+            const coverage = Math.round(finalRecommendation / dailyDemand);
+            
+            // MOSTRAR RESULTADOS
+            document.getElementById('recommendation').textContent = finalRecommendation + ' unidades';
+            document.getElementById('baseDemand').textContent = Math.round(baseDemand);
+            document.getElementById('seasonalFactor').textContent = seasonalFactor.toFixed(3);
+            document.getElementById('coverage').textContent = coverage + ' días';
+            
+            // EXPLICACIÓN SIMPLE
+            let temporada = '';
+            if (seasonalFactor > 1.3) {
+                temporada = 'temporada alta';
+            } else if (seasonalFactor < 0.7) {
+                temporada = 'temporada baja';
+            } else {
+                temporada = 'temporada normal';
+            }
+            
+            const diferencia = Math.round(((finalRecommendation - product.averageMonthly) / product.averageMonthly) * 100);
+            let comparacion = '';
+            if (Math.abs(diferencia) < 10) {
+                comparacion = `similar a tu promedio histórico de ${product.averageMonthly} unidades`;
+            } else if (diferencia > 0) {
+                comparacion = `${diferencia}% más que tu promedio histórico de ${product.averageMonthly} unidades`;
+            } else {
+                comparacion = `${Math.abs(diferencia)}% menos que tu promedio histórico de ${product.averageMonthly} unidades`;
+            }
+            
+            let razon = '';
+            if (baseRecommendation > maxSellable) {
+                razon = `limitamos la cantidad por la vida útil de ${product.shelfLife} días para evitar mermas`;
+            } else if (seasonalFactor > 1.3) {
+                razon = `aumentamos por la alta demanda típica de ${targetMonth}`;
+            } else if (seasonalFactor < 0.7) {
+                razon = `reducimos por la baja demanda típica de ${targetMonth}`;
+            } else {
+                razon = `mantenemos cantidad estándar para ${targetMonth}`;
+            }
+            
+            const explanationText = `
+                <p><strong>Recomendamos ${finalRecommendation} unidades de ${product.name}</strong> porque 
+                es ${temporada} (factor ${seasonalFactor.toFixed(2)}) y representa una cantidad 
+                ${comparacion}. Además, ${razon}. 
+                Esta cantidad te dará aproximadamente ${coverage} días de cobertura.</p>
+            `;
+            
+            document.getElementById('explanation').innerHTML = explanationText;
+            
+            // Mostrar resultados
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
